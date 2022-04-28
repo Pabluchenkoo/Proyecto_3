@@ -39,6 +39,10 @@ public class VentanaPrincipal extends JFrame{
 
 	public static void main(String[] args)
 	{
+		/*Boolean, verificacion*/
+		/*if False:
+		 * 			 llama a VentanaNuevoProyecto, crear proyecto (crear proyecto llama a controlador setProyect
+		 * 			llama a VentanaNuevoParticipante, crear participante (llama a controlador addParticipante*/
 		new VentanaPrincipal();
 	}
 
