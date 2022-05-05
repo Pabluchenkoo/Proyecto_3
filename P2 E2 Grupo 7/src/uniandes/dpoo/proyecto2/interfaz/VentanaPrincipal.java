@@ -1,49 +1,86 @@
 package uniandes.dpoo.proyecto2.interfaz;
 
 import java.awt.BorderLayout;
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import uniandes.dpoo.proyecto2.controlador.Controlador;
+
 
 @SuppressWarnings("serial")
 public class VentanaPrincipal extends JFrame{
+	
+	private VentanaNuevoProyecto ventanaProyecto;
 
-	public VentanaPrincipal()
+
+	public VentanaPrincipal(Boolean existe, Controlador controlador)
 	{
+		if (existe ==false)
+		{
+			ventanaProyecto = new VentanaNuevoProyecto(this, controlador);
+		}
+		else
+		{
+		
 		setTitle("Registro Proyecto :)");
 		setLayout(new BorderLayout());
-		
+
 		JLabel arriba = new JLabel ("Nombre proyecto:" +"\n Fecha");
-		
+
 		JButton izquierda = new JButton ("Agregar Participantes");
 		JButton centro = new JButton ("Agregar Actividad");
 		JButton derecha = new JButton ("Generar Reporte");
-		
+
 		JLabel abajo = new JLabel ("Aqui va a ir la linea del tiempo");
-		
+
 		add(izquierda, BorderLayout.WEST);
 		add(centro, BorderLayout.CENTER);
 		add(derecha, BorderLayout.EAST);
 		add (arriba, BorderLayout.NORTH);
 		add (abajo, BorderLayout.SOUTH);
-		
+
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(1200,500);
 		setVisible(true);
+		}
 	}
 
 
-
-
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
+
 		/*Boolean, verificacion*/
 		/*if False:
 		 * 			 llama a VentanaNuevoProyecto, crear proyecto (crear proyecto llama a controlador setProyect
 		 * 			llama a VentanaNuevoParticipante, crear participante (llama a controlador addParticipante*/
-		new VentanaPrincipal();
+		/*if True:
+		 * 			 llama a VentanaNuevoProyecto, crear proyecto (crear proyecto llama a controlador setProyect
+		 * 			llama a VentanaNuevoParticipante, crear participante (llama a controlador addParticipante*/
+		Controlador controlador = new Controlador();
+
+		if (controlador.verificarProy()==false)
+		{
+			System.out.println((LocalDateTime.now()).toLocalDate());
+			new VentanaPrincipal(false, controlador);
+		}
+		else
+		{
+			new VentanaPrincipal(true, controlador);
+		}
 	}
+
+
+	public void crearProyecto(String nombre, String descripccion, String fechaInicio, String fechaFin,
+			int nActividades)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+	
+
 
 }

@@ -3,6 +3,7 @@ package uniandes.dpoo.proyecto2.controlador;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import uniandes.dpoo.proyecto2.modelo.Proyecto;
@@ -16,6 +17,12 @@ public class Controlador {
 
 	public void setRegistro(Registro registro) {
 		this.registro = new Registro();
+	}
+	
+	public Boolean verificarProy() throws IOException
+	{
+		setRegistro(registro);
+		return(registro.verificarProyecto());
 	}
 
 	public void cargarAplicacion() throws IOException 
@@ -151,6 +158,22 @@ public class Controlador {
 		String correoParticipante = input("Ingrese correo del Participante: ");
 		registro.escribirParticipante(nombreParticipante, correoParticipante);
 		proyecto.cargarParticipante(nombreParticipante, correoParticipante);
+	}
+	
+	public String input(String mensaje)
+	{
+		try
+		{
+			System.out.print(mensaje + ": ");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			return reader.readLine();
+		}
+		catch (IOException e)
+		{
+			System.out.println("Error leyendo de la consola");
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
