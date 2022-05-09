@@ -41,7 +41,9 @@ public class VentanaNuevoProyecto extends JFrame implements ActionListener{
 	
 	private VentanaPrincipal padre;
 
-	public VentanaNuevoProyecto(VentanaPrincipal papa, Controlador controlador)
+	private Controlador controlador = new Controlador();
+
+	public VentanaNuevoProyecto(VentanaPrincipal papa)
 	{
 		padre = papa;
 		

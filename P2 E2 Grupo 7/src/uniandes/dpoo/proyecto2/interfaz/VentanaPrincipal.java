@@ -15,13 +15,13 @@ import uniandes.dpoo.proyecto2.controlador.Controlador;
 public class VentanaPrincipal extends JFrame{
 	
 	private VentanaNuevoProyecto ventanaProyecto;
+	Controlador controlador = new Controlador();
 
-
-	public VentanaPrincipal(Boolean existe, Controlador controlador)
+	public VentanaPrincipal(Boolean existe )
 	{
 		if (existe ==false)
 		{
-			ventanaProyecto = new VentanaNuevoProyecto(this, controlador);
+			ventanaProyecto = new VentanaNuevoProyecto(this);
 		}
 		else
 		{
@@ -65,11 +65,11 @@ public class VentanaPrincipal extends JFrame{
 		if (controlador.verificarProy()==false)
 		{
 			System.out.println((LocalDateTime.now()).toLocalDate());
-			new VentanaPrincipal(false, controlador);
+			new VentanaPrincipal(false);
 		}
 		else
 		{
-			new VentanaPrincipal(true, controlador);
+			new VentanaPrincipal(true);
 		}
 	}
 

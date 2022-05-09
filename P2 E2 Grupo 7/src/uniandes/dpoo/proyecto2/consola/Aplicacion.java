@@ -19,14 +19,21 @@ import uniandes.dpoo.proyecto2.modelo.Stopwatch;
 
 public class Aplicacion {
 
-	public static void main(String[] args) throws FileNotFoundException, IOException 
+	public static Aplicacion consola = new Aplicacion();
+	public static void main(String[] args) throws FileNotFoundException, IOException  
 	{
 		// TODO Auto-generated method stub
+		try {
 		System.out.println((LocalDateTime.now().toLocalTime().getHour())+":"+(LocalDateTime.now().toLocalTime().getMinute()));
 		System.out.println((LocalDateTime.now()).toLocalDate());
 
-		Aplicacion consola = new Aplicacion();
+		
 		consola.ejecutarAplicacion();
+		}
+		catch	(Exception  e) {
+			e.printStackTrace();
+			System.out.println("Error");
+		}
 	}
 
 	private Proyecto proyecto;
@@ -66,6 +73,7 @@ public class Aplicacion {
 				br.close();
 				System.out.println("\n-Participantes cargados exitosamente \n");
 			}
+			
 			else
 			{
 				System.out.println("***ADVERTENCIA - No se han encontrado participantes en el proyecto existente\n");

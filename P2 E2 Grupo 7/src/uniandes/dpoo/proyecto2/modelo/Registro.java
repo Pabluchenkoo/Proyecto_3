@@ -28,7 +28,8 @@ public class Registro {
 			bw.close();
 
 		}
-		return (existe);
+
+		return existe;
 	}
 
 	public void escribirProyecto(String nombre, String descripccion, String fechaInicio, String fechaFin, ArrayList<String> listaTiposActividades) throws IOException
