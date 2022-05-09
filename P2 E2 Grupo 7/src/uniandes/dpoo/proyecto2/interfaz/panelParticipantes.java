@@ -66,25 +66,25 @@ public class panelParticipantes extends JPanel implements ListSelectionListener
 
 
         JPanel panelProyectos = new JPanel();
-        panelProyectos.setLayout( new GridLayout(3, 1 ) );
+        panelProyectos.setLayout( new BorderLayout() );
         panelProyectos.setPreferredSize(new Dimension(250, 200));
         panelProyectos.setBackground(Color.LIGHT_GRAY);
         this.add(panelProyectos, BorderLayout.NORTH);
 
         JLabel lblProyectos = new JLabel("Lista de Proyectos:");
         lblProyectos.setFont(new Font("Arial", Font.BOLD, 18));
-        panelProyectos.add(lblProyectos);
+        panelProyectos.add(lblProyectos, BorderLayout.NORTH);
 
         listaProyectos = new JList( );
         listaProyectos.addListSelectionListener( this );
         scrollProyectos = new JScrollPane( listaProyectos );
         scrollProyectos.setPreferredSize( new Dimension( 250, 240 ) );
-        panelProyectos.add( scrollProyectos );
+        panelProyectos.add( scrollProyectos, BorderLayout.CENTER );
 
         btnEscoger = new JButton( "Escoger" );
         // btnEscoger.addActionListener( ventanaPrincipal );
-        btnEscoger.setPreferredSize(new Dimension(20,20));
-        panelProyectos.add( btnEscoger);
+        btnEscoger.setPreferredSize(new Dimension(20,40));
+        panelProyectos.add( btnEscoger, BorderLayout.SOUTH );
 
         // ---------------------------------------------------------------------------
         //Panel Participantes-----------------------------------------------------
@@ -92,23 +92,23 @@ public class panelParticipantes extends JPanel implements ListSelectionListener
 
 
         JPanel panelParticipantes = new JPanel();
-        panelParticipantes.setLayout( new GridLayout(2, 1 ) );
-        panelParticipantes.setPreferredSize(new Dimension(250, 50));
+        panelParticipantes.setLayout( new BorderLayout() );
+        panelParticipantes.setPreferredSize(new Dimension(250, 30));
         panelParticipantes.setBackground(Color.LIGHT_GRAY);
         this.add(panelParticipantes, BorderLayout.CENTER);
 
         JLabel lblParticipantes = new JLabel("Lista de Participantes:");
-        lblProyectos.setFont(new Font("Arial", Font.BOLD, 18));
-        lblProyectos.setPreferredSize(new Dimension(250, 5));
-        panelParticipantes.add(lblParticipantes);
+        lblParticipantes.setFont(new Font("Arial", Font.BOLD, 18));
+        lblParticipantes.setPreferredSize(new Dimension(100, 20));
+        panelParticipantes.add(lblParticipantes , BorderLayout.NORTH);
 
         listaParticipantes = new JList( );
         listaParticipantes.addListSelectionListener( this );
         scrollParticipantes = new JScrollPane( listaParticipantes );
-        scrollParticipantes.setPreferredSize( new Dimension( 250, 1 ) );
-        panelParticipantes.add( scrollParticipantes );
+        scrollParticipantes.setPreferredSize( new Dimension( 250, 25 ) );
+        panelParticipantes.add( scrollParticipantes, BorderLayout.CENTER );
         
-        
+
         // ---------------------------------------------------------------------------
         //Panel botones-----------------------------------------------------
         // ---------------------------------------------------------------------------
