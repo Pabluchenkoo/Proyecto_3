@@ -7,15 +7,22 @@ import java.time.LocalDateTime;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import uniandes.dpoo.proyecto2.controlador.Controlador;
 
 
 @SuppressWarnings("serial")
-public class VentanaPrincipal extends JFrame{
+public class VentanaPrincipal extends JFrame
+{
+
 	
 	private VentanaNuevoProyecto ventanaProyecto;
+
 	Controlador controlador = new Controlador();
+
+	private panelParticipantes panelParticipantes;
+
 
 	public VentanaPrincipal(Boolean existe )
 	{
@@ -29,22 +36,22 @@ public class VentanaPrincipal extends JFrame{
 		setTitle("Registro Proyecto :)");
 		setLayout(new BorderLayout());
 
-		JLabel arriba = new JLabel ("Nombre proyecto:" +"\n Fecha");
+		JLabel arriba = new JLabel (" Agregar y consultar participantes");
 
-		JButton izquierda = new JButton ("Agregar Participantes");
+		panelParticipantes = new panelParticipantes(this);
 		JButton centro = new JButton ("Agregar Actividad");
 		JButton derecha = new JButton ("Generar Reporte");
 
 		JLabel abajo = new JLabel ("Aqui va a ir la linea del tiempo");
 
-		add(izquierda, BorderLayout.WEST);
+		add(panelParticipantes, BorderLayout.WEST);
 		add(centro, BorderLayout.CENTER);
 		add(derecha, BorderLayout.EAST);
 		add (arriba, BorderLayout.NORTH);
 		add (abajo, BorderLayout.SOUTH);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(1200,500);
+		setSize(1200,800);
 		setVisible(true);
 		}
 	}
