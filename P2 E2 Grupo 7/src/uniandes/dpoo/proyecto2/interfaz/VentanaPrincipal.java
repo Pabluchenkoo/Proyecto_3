@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import uniandes.dpoo.proyecto2.controlador.Controlador;
+import uniandes.dpoo.proyecto2.modelo.Participante;
 
 
 @SuppressWarnings("serial")
@@ -19,7 +20,7 @@ public class VentanaPrincipal extends JFrame
 	
 	private VentanaNuevoProyecto ventanaProyecto;
 
-	Controlador controlador = new Controlador();
+	private static Controlador controlador = new Controlador();
 
 	private panelParticipantes panelParticipantes;
 
@@ -67,8 +68,8 @@ public class VentanaPrincipal extends JFrame
 		/*if True:
 		 * 			 llama a VentanaNuevoProyecto, crear proyecto (crear proyecto llama a controlador setProyect
 		 * 			llama a VentanaNuevoParticipante, crear participante (llama a controlador addParticipante*/
-		Controlador controlador = new Controlador();
-
+		
+		
 		if (controlador.verificarProy()==false)
 		{
 			System.out.println((LocalDateTime.now()).toLocalDate());
@@ -80,6 +81,24 @@ public class VentanaPrincipal extends JFrame
 		}
 	}
 
+	//  /**
+    //  * Muestra la información del archivo especificado
+    //  * @param archivo es el archivo a visualizar
+    //  */
+    // public void verInfoArchivo( Participante archivo )
+    // {
+    //     //
+    //     // Actualiza la información en el panel de botones
+    //     panelParticipantes.actualizar( archivo );
+    //     //
+    //     // Muestra el dialogo si el archivo no es null
+    //     if( archivo != null )
+    //     {
+    //         DialogoInfoArchivo dialogo = new DialogoInfoArchivo( this, archivo );
+    //         dialogo.setVisible( true );
+    //     }
+
+    // }
 
 	public void crearProyecto(String nombre, String descripccion, String fechaInicio, String fechaFin,
 			int nActividades)

@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import uniandes.dpoo.proyecto2.modelo.Participante;
+
 import java.awt.*;
 import java.util.*;
 
@@ -55,6 +57,7 @@ public class panelParticipantes extends JPanel implements ListSelectionListener
 
     public panelParticipantes(VentanaPrincipal principal)
     {
+        ventanaPrincipal = principal;
         setPreferredSize(new Dimension(250, 200));
         ventanaPrincipal = principal;
         setLayout( new BorderLayout( ) );
@@ -149,11 +152,39 @@ public class panelParticipantes extends JPanel implements ListSelectionListener
 
     }
 
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        // TODO Auto-generated method stub
-        
+   
+    /**
+     * Actualiza la información de los archivos
+     * @param archivos son los archivos nuevos
+     */
+    public void refrescarParticipantes( Participante[] participantes )
+    {
+        listaParticipantes.setListData( participantes );
     }
 
+    /**
+     * Devuelve el archivo seleccionado. Devuelve null si ningún archivo esta seleccionado
+     * @return Archivo seleccionado
+     */
+    public Participante darArchivoSeleccionado( )
+    {
+        return ( Participante )listaParticipantes.getSelectedValue( );
+    }
+
+    // -----------------------------------------------------------------
+    // Eventos
+    // -----------------------------------------------------------------
+
+    /**
+     * Cambio en la selección de la lista
+     * @param e es el evento de cambio
+     */
+    public void valueChanged( ListSelectionEvent e )
+    {
+        // Selección en la lista de archivos
+        Participante archivo = darArchivoSeleccionado( );
+        // Muestra el diálogo del archivo
+        // principal.verInfoArchivo( archivo );
+    }
 
 }

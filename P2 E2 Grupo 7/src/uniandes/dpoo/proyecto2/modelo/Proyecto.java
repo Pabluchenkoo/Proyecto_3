@@ -85,7 +85,7 @@ public class Proyecto {
 		elReporte.ejecutarReporte(id, actividades, tipoActividades, participantes);
 	}
 
-
+	
 
 
 }
