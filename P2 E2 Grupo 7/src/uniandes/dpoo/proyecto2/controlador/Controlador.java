@@ -152,6 +152,14 @@ public class Controlador {
 
 	}
 	
+	public void setProyectoInterfaz(String nombreProyecto, String descripccionProyecto, String fechaInicioProyecto, String fechaFinalizacionProyecto,
+			ArrayList<String> actividadesTipo) throws IOException
+	{
+		this.proyecto = new Proyecto(nombreProyecto, descripccionProyecto, fechaInicioProyecto, fechaFinalizacionProyecto, actividadesTipo);
+		registro.escribirProyecto(nombreProyecto, descripccionProyecto, fechaInicioProyecto, fechaFinalizacionProyecto, actividadesTipo);
+
+	}
+	
 	public void addParticipante() throws IOException
 	{
 		String nombreParticipante = input("Ingrese nombre del Participante: ");

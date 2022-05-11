@@ -25,7 +25,7 @@ public class VentanaTipoActividad extends JFrame implements ActionListener {
 	{
 		papa = padre;
 
-		setTitle("Nuevo Proyecto");
+		setTitle("Agregar nuevo tipo de actividad");
 
 		setLayout(new BorderLayout());
 		

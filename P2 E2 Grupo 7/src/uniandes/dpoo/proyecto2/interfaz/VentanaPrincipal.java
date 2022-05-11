@@ -3,6 +3,7 @@ package uniandes.dpoo.proyecto2.interfaz;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -75,10 +76,10 @@ public class VentanaPrincipal extends JFrame{
 
 
 	public void crearProyecto(String nombre, String descripccion, String fechaInicio, String fechaFin,
-			int nActividades)
+			ArrayList<String> Actividades, Controlador controlador) throws IOException
 	{
 		// TODO Auto-generated method stub
-		
+		controlador.setProyectoInterfaz(nombre, descripccion, fechaInicio, fechaFin, Actividades);
 	}
 	
 
