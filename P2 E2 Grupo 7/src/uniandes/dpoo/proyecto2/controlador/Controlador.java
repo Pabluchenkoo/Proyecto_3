@@ -161,6 +161,11 @@ public class Controlador {
 
 	}
 	
+	public void cargarProyectoInterfaz() throws IOException
+	{
+		cargarProyecto(proyecto);
+	}
+	
 	public void addParticipante() throws IOException
 	{
 		String nombreParticipante = input("Ingrese nombre del Participante: ");
@@ -184,7 +189,8 @@ public class Controlador {
 		}
 		return null;
 	}
-	public void cargarReporte(){
+	public void cargarReporte(int id)
+	{
 		ArrayList<Participante> listaParticipantes = proyecto.getParticipantes();
 		int posParticipante = 0;
 		for (Participante elParticipante:listaParticipantes)
@@ -192,7 +198,7 @@ public class Controlador {
 			System.out.println(posParticipante+"- " + elParticipante.getNombre());
 			posParticipante++;
 		}
-		int id = Integer.parseInt(input("Ingrese el ID del participante para el reporte"));
+		
 		proyecto.ejecutarReporte(id);
 	}
 

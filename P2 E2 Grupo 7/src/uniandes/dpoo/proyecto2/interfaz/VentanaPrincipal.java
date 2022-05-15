@@ -18,11 +18,13 @@ import uniandes.dpoo.proyecto2.controlador.Controlador;
 public class VentanaPrincipal extends JFrame implements ActionListener{
 	
 	private VentanaNuevoProyecto ventanaProyecto;
+	private VentanaElegirParticipante ventanaReporte;
 	private static final String ENTER = "ENTER";
-	private JButton derecha;
+	private JButton btnReporte;
+	private static Controlador controlador;
 
 
-	public VentanaPrincipal(Boolean existe, Controlador controlador)
+	public VentanaPrincipal(Boolean existe, Controlador controlador) throws IOException
 	{
 		if (existe ==false)
 		{
@@ -32,6 +34,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		else
 		{
 		
+		controlador.cargarProyectoInterfaz();
+			
 		setTitle("Registro Proyecto :)");
 		setLayout(new BorderLayout());
 
@@ -40,14 +44,15 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		JButton izquierda = new JButton ("Agregar Participantes");
 		JButton centro = new JButton ("Agregar Actividad");
 
-		derecha = new JButton("Generar reporte");
-		derecha.setActionCommand(ENTER);
-		derecha.addActionListener(this);
+		btnReporte = new JButton("Generar reporte");
+		btnReporte.setActionCommand(ENTER);
+		btnReporte.addActionListener(this);
+		
 		JLabel abajo = new JLabel ("Aqui va a ir la linea del tiempo");
 
 		add(izquierda, BorderLayout.WEST);
 		add(centro, BorderLayout.CENTER);
-		add(derecha, BorderLayout.EAST);
+		add(btnReporte, BorderLayout.EAST);
 		add (arriba, BorderLayout.NORTH);
 		add (abajo, BorderLayout.SOUTH);
 
@@ -68,7 +73,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		/*if True:
 		 * 			 llama a VentanaNuevoProyecto, crear proyecto (crear proyecto llama a controlador setProyect
 		 * 			llama a VentanaNuevoParticipante, crear participante (llama a controlador addParticipante*/
-		Controlador controlador = new Controlador();
+		controlador = new Controlador();
 
 		if (controlador.verificarProy()==false)
 		{
@@ -89,12 +94,21 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		controlador.setProyectoInterfaz(nombre, descripccion, fechaInicio, fechaFin, Actividades);
 	}
 	
+	public void generarReporte(int id, Controlador controlador)
+	{
+		
+		controlador.cargarReporte(id);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String grito = e.getActionCommand();
 		if (grito.equals(ENTER))
 		{
 			System.out.println("prueba");
+			
+			ventanaReporte = new VentanaElegirParticipante(this, controlador);
+			
 		}
 		
 	}
