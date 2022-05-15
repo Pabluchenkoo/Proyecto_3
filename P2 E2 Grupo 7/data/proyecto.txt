@@ -1,0 +1,7 @@
+Nombre: proyecto de prueba
+Descripccion: pruebas
+Fecha Inicio: 12/05/2022
+Fecha Finalizacion: 15/05/2022
+analisis
+disenio
+implementacion

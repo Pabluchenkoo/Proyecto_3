@@ -97,7 +97,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 	public void generarReporte(int id, Controlador controlador)
 	{
 		
-		controlador.cargarReporte(id);
+		ArrayList<String> reporte = controlador.cargarReporte(id);
+		
 	}
 	
 	@Override
@@ -105,7 +106,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		String grito = e.getActionCommand();
 		if (grito.equals(ENTER))
 		{
-			System.out.println("prueba");
+			System.out.println("Ejecutando generar reporte");
 			
 			ventanaReporte = new VentanaElegirParticipante(this, controlador);
 			

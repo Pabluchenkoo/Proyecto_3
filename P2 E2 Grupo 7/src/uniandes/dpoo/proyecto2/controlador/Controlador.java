@@ -189,7 +189,7 @@ public class Controlador {
 		}
 		return null;
 	}
-	public void cargarReporte(int id)
+	public ArrayList<String> cargarReporte(int id)
 	{
 		ArrayList<Participante> listaParticipantes = proyecto.getParticipantes();
 		int posParticipante = 0;
@@ -199,7 +199,7 @@ public class Controlador {
 			posParticipante++;
 		}
 		
-		proyecto.ejecutarReporte(id);
+		return proyecto.ejecutarReporte(id);
 	}
 
 }
