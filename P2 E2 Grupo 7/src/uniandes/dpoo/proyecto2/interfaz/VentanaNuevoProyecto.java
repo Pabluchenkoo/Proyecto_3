@@ -153,7 +153,6 @@ public class VentanaNuevoProyecto extends JFrame implements ActionListener{
 				int nActividades = Integer.parseInt(numactividadesTipo);
 				for (int pos = 0; pos < nActividades; pos++)
 				{
-
 					new VentanaTipoActividad(this);
 				}
 
@@ -173,6 +172,8 @@ public class VentanaNuevoProyecto extends JFrame implements ActionListener{
 				String fechaFin = textS2.getText();
 			
 				padre.crearProyecto(nombre, descripccion, fechaInicio, fechaFin, tipoActividades, aControlador);
+			    /*cerrar ventana*/
+				
 			}
 			catch (Exception ex) {
 				JOptionPane.showMessageDialog(this, "Falta dato", "Error", JOptionPane.WARNING_MESSAGE);

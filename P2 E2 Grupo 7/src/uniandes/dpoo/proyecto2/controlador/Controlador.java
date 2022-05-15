@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import uniandes.dpoo.proyecto2.modelo.Participante;
 import uniandes.dpoo.proyecto2.modelo.Proyecto;
 import uniandes.dpoo.proyecto2.modelo.Registro;
 
@@ -182,6 +183,17 @@ public class Controlador {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public void cargarReporte(){
+		ArrayList<Participante> listaParticipantes = proyecto.getParticipantes();
+		int posParticipante = 0;
+		for (Participante elParticipante:listaParticipantes)
+		{
+			System.out.println(posParticipante+"- " + elParticipante.getNombre());
+			posParticipante++;
+		}
+		int id = Integer.parseInt(input("Ingrese el ID del participante para el reporte"));
+		proyecto.ejecutarReporte(id);
 	}
 
 }

@@ -1,6 +1,8 @@
 package uniandes.dpoo.proyecto2.interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,9 +15,11 @@ import uniandes.dpoo.proyecto2.controlador.Controlador;
 
 
 @SuppressWarnings("serial")
-public class VentanaPrincipal extends JFrame{
+public class VentanaPrincipal extends JFrame implements ActionListener{
 	
 	private VentanaNuevoProyecto ventanaProyecto;
+	private static final String ENTER = "ENTER";
+	private JButton derecha;
 
 
 	public VentanaPrincipal(Boolean existe, Controlador controlador)
@@ -23,6 +27,7 @@ public class VentanaPrincipal extends JFrame{
 		if (existe ==false)
 		{
 			ventanaProyecto = new VentanaNuevoProyecto(this, controlador);
+			
 		}
 		else
 		{
@@ -34,8 +39,10 @@ public class VentanaPrincipal extends JFrame{
 
 		JButton izquierda = new JButton ("Agregar Participantes");
 		JButton centro = new JButton ("Agregar Actividad");
-		JButton derecha = new JButton ("Generar Reporte");
 
+		derecha = new JButton("Generar reporte");
+		derecha.setActionCommand(ENTER);
+		derecha.addActionListener(this);
 		JLabel abajo = new JLabel ("Aqui va a ir la linea del tiempo");
 
 		add(izquierda, BorderLayout.WEST);
@@ -82,6 +89,15 @@ public class VentanaPrincipal extends JFrame{
 		controlador.setProyectoInterfaz(nombre, descripccion, fechaInicio, fechaFin, Actividades);
 	}
 	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String grito = e.getActionCommand();
+		if (grito.equals(ENTER))
+		{
+			System.out.println("prueba");
+		}
+		
+	}
 
 
 }
