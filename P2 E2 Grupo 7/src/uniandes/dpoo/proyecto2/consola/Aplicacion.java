@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.time.LocalDateTime;
 
 import uniandes.dpoo.proyecto2.modelo.Actividad;
@@ -19,19 +20,32 @@ import uniandes.dpoo.proyecto2.modelo.Stopwatch;
 
 public class Aplicacion {
 
-	public static void main(String[] args) throws FileNotFoundException, IOException 
+	private Proyecto proyecto;
+
+	private Registro registro = new Registro();
+
+
+	public static Aplicacion consola = new Aplicacion();
+
+	private LinkedList<String>	participantesIngresados = new LinkedList<String>();
+
+	public static void main(String[] args) throws FileNotFoundException, IOException  
 	{
 		// TODO Auto-generated method stub
+		try {
 		System.out.println((LocalDateTime.now().toLocalTime().getHour())+":"+(LocalDateTime.now().toLocalTime().getMinute()));
 		System.out.println((LocalDateTime.now()).toLocalDate());
 
-		Aplicacion consola = new Aplicacion();
+		
 		consola.ejecutarAplicacion();
+		}
+		catch	(Exception  e) {
+			e.printStackTrace();
+			System.out.println("Error");
+		}
 	}
 
-	private Proyecto proyecto;
-
-	private Registro registro;
+	
 
 	public void setRegistro(Registro registro) {
 		this.registro = new Registro();
@@ -66,6 +80,7 @@ public class Aplicacion {
 				br.close();
 				System.out.println("\n-Participantes cargados exitosamente \n");
 			}
+			
 			else
 			{
 				System.out.println("***ADVERTENCIA - No se han encontrado participantes en el proyecto existente\n");
@@ -78,7 +93,7 @@ public class Aplicacion {
 			if (registro.verificarParticipantes()==false)
 			{
 				System.out.println("-Creando participante nuevo... \n");
-				addParticipante();
+				addParticipante("");
 			}
 		}
 
@@ -120,7 +135,7 @@ public class Aplicacion {
 				mostrarMenu();
 				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
 				if (opcion_seleccionada == 1 && proyecto != null)
-					addActividad();
+					addActividad(null, null, null, null, null, null, null, null);
 				else if (opcion_seleccionada == 2 && proyecto != null)
 					/*pruebaStopwatch();*/
 					/*System.out.println("Construccion ...");*/
@@ -129,7 +144,7 @@ public class Aplicacion {
 				else if (opcion_seleccionada == 3 && proyecto != null)
 					cargarReporte();
 				else if (opcion_seleccionada == 4 && proyecto != null)					
-					addParticipante();
+					addParticipante("");
 				else if (opcion_seleccionada == 5)
 				{
 					System.out.println("\n-Saliendo de la aplicacion ...");
@@ -153,7 +168,7 @@ public class Aplicacion {
 	}
 
 
-	private void ejecutarCronometro() throws IOException 
+	public void ejecutarCronometro() throws IOException 
 	{	
 		String titulo = input("Ingrese titulo de la Actividad: ");
 		String descripccion = input("Ingrese descripccion de la Actividad: ");
@@ -245,6 +260,29 @@ public class Aplicacion {
 		this.proyecto = new Proyecto(nombreProyecto, descripccionProyecto, fechaInicioProyecto, fechaFinalizacionProyecto, actividadesTipo);
 		registro.escribirProyecto(nombreProyecto, descripccionProyecto, fechaInicioProyecto, fechaFinalizacionProyecto, actividadesTipo);
 
+	}
+	public void setProyectoInterfaz(String pNombreProyecto, String pDescripcionProyecto, String pFechaInicioProyecto,
+	 String pFechaFinalizacionProyecto, int pNumeroActividades) throws IOException
+	{
+		System.out.println("Ingrese nombre de Proyecto: ");
+		String nombreProyecto = pNombreProyecto;
+		System.out.println("Ingrese descripcion del Proyecto: ");
+		String descripccionProyecto = pDescripcionProyecto;
+		System.out.println("Ingrese fecha de inicio (DD/MM/AAAA): ");
+		String fechaInicioProyecto = pFechaInicioProyecto;
+		System.out.println("Ingrese fecha de finalizacion (DD/MM/AAAA): ");
+		String fechaFinalizacionProyecto = pFechaFinalizacionProyecto;
+		System.out.println("Ingrese cuantos tipos de actividad van a existir: ");		
+		int numeroActividadesTipo = pNumeroActividades;
+		ArrayList<String> actividadesTipo = new ArrayList<>(numeroActividadesTipo);
+		for (int pos = 0; pos < numeroActividadesTipo; pos++)
+		{
+			String actividadTipo = input("Ingrese nombre de Actividad "+pos+": ");
+			actividadesTipo.add(pos, actividadTipo);
+		}
+		this.proyecto = new Proyecto(nombreProyecto, descripccionProyecto, fechaInicioProyecto, fechaFinalizacionProyecto, actividadesTipo);
+		registro.escribirProyecto(nombreProyecto, descripccionProyecto, fechaInicioProyecto, fechaFinalizacionProyecto, actividadesTipo);
+
 
 
 	}
@@ -282,18 +320,29 @@ public class Aplicacion {
 		System.out.println("\n-Proyecto cargado exitosamente! \n");
 	}
 
-	public void addParticipante() throws IOException
+	public void addParticipante(String pParticipante) throws IOException
 	{
-		String nombreParticipante = input("Ingrese nombre del Participante: ");
-		String correoParticipante = input("Ingrese correo del Participante: ");
-		registro.escribirParticipante(nombreParticipante, correoParticipante);
-		proyecto.cargarParticipante(nombreParticipante, correoParticipante);
+		String participante = pParticipante;
+		String[] info = participante.split(" ");
+		String pNombreParticipante = info[0];
+		String pCorreoParticipante = info[1];
+		participantesIngresados.addLast	(participante);
+		proyecto = new Proyecto("x","x" , "x", "x", new ArrayList<String>());
+		registro.escribirParticipante(pNombreParticipante, pCorreoParticipante);
+		proyecto.cargarParticipante(pNombreParticipante, pCorreoParticipante);
+
+		// String nombreParticipante = input("Ingrese nombre del Participante: ");
+		// String correoParticipante = input("Ingrese correo del Participante: ");
+		// registro.escribirParticipante(nombreParticipante, correoParticipante);
+		// proyecto.cargarParticipante(nombreParticipante, correoParticipante);
 	}
 
-	public void addActividad() throws IOException 
+	public void addActividad(String pTitulo, String descrip, 
+	String pTipoID, String pFecha, String pHoraInicio, String pHoraFin, 
+	String pDuracion, String pParticipanteID) throws IOException 
 	{
-		String titulo = input("Ingrese titulo de la Actividad: ");
-		String descripccion = input("Ingrese descripccion de la Actividad: ");
+		String titulo = pTitulo;
+		String descripccion = descrip;
 
 		System.out.println("\nTIPOS DE ACTIVIDADES:");
 		ArrayList <String> listaActividades = proyecto.getTipoActividades();
@@ -304,10 +353,54 @@ public class Aplicacion {
 			posTipos++;
 		}
 
-		int tipoID = Integer.parseInt(input("\nIngrese el tipo de la Actividad: "));
-		String fecha = input("Ingrese fecha en la que se realizo la Actividad (AAAA-MM-DD): ");
-		String horaInicio = (input("Ingrese hora de inicio: (formato 24 horas 'HH:MM')"));
-		String horaFin = (input("Ingrese hora de finalizacion(formato 24 horas 'HH:MM')"));
+		int tipoID = Integer.parseInt(pTipoID);
+		String fecha = pFecha;
+		String horaInicio = pHoraInicio;
+		String horaFin = pHoraFin;
+		String[] splitHoraInicio = horaInicio.split(":");
+		int horaIn = Integer.parseInt(splitHoraInicio[0]);
+		int minutosIn = Integer.parseInt(splitHoraInicio[1]);
+		
+		String[] splitHoraFin = horaFin.split(":");
+		int horaFi = Integer.parseInt(splitHoraFin[0]);
+		int minutosFi = Integer.parseInt(splitHoraFin[1]);
+		int horaProcesada = (horaFi-horaIn)*60 ;
+		int duracion = (minutosFi-minutosIn+horaProcesada);
+
+		System.out.println("\nLISTA DE PARTICIPANTES:");
+		ArrayList<Participante> listaParticipantes = proyecto.getParticipantes();
+		int posParticipante = 0;
+		for (Participante elParticipante:listaParticipantes)
+		{
+			System.out.println(posParticipante+"- " + elParticipante.getNombre());
+			posParticipante++;
+		}
+
+		int participanteID = Integer.parseInt(pParticipanteID);
+
+		registro.escribirActividades(titulo, descripccion, tipoID, fecha, horaInicio, horaFin, duracion, participanteID);
+		proyecto.cargarActividad(titulo, descripccion, tipoID, fecha, horaInicio, horaFin, duracion, participanteID);
+	}
+
+	public void addActividadInterfaz(String pTitulo,String pDescripcion, int pTipoActividad, String pFecha, String pHoraInicio
+	,String pHoraFin) throws IOException 
+	{
+		String titulo = pTitulo	;
+		String descripccion = pDescripcion	;
+
+		System.out.println("\nTIPOS DE ACTIVIDADES:");
+		ArrayList <String> listaActividades = proyecto.getTipoActividades();
+		int posTipos = 0;
+		for (String tipo:listaActividades)
+		{
+			System.out.println(posTipos+"- " +tipo);
+			posTipos++;
+		}
+
+		int tipoID = pTipoActividad;
+		String fecha = pFecha;
+		String horaInicio = pHoraInicio;
+		String horaFin = pHoraFin;
 		String[] splitHoraInicio = horaInicio.split(":");
 		int horaIn = Integer.parseInt(splitHoraInicio[0]);
 		int minutosIn = Integer.parseInt(splitHoraInicio[1]);
@@ -332,6 +425,8 @@ public class Aplicacion {
 		registro.escribirActividades(titulo, descripccion, tipoID, fecha, horaInicio, horaFin, duracion, participanteID);
 		proyecto.cargarActividad(titulo, descripccion, tipoID, fecha, horaInicio, horaFin, duracion, participanteID);
 	}
+
+
 
 	public void mostrarMenu()
 	{
@@ -375,6 +470,19 @@ public class Aplicacion {
 		return null;
 	}
 
+	public Registro getRegistro() {
+
+		Registro registro = new Registro();
+		return registro;
+	}
+
+
+
+	public LinkedList<String> cargarParticipantes() 
+	{
+		return participantesIngresados;
+
+	}
 
 
 

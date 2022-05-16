@@ -40,8 +40,9 @@ public class VentanaNuevoProyecto extends JFrame implements ActionListener{
 	private JButton btnEnter;
 	
 	private VentanaPrincipal padre;
+	private Controlador controlador;
 
-	public VentanaNuevoProyecto(VentanaPrincipal papa, Controlador controlador)
+	public VentanaNuevoProyecto(VentanaPrincipal papa)
 	{
 		padre = papa;
 		
@@ -132,11 +133,11 @@ public class VentanaNuevoProyecto extends JFrame implements ActionListener{
 				String fechaFin = textS2.getText();
 				String numactividadesTipo = textS3.getText();
 				int nActividades = Integer.parseInt(numactividadesTipo);
-				for (int pos = 0; pos < nActividades; pos++)
-				{
+				// for (int pos = 0; pos < nActividades; pos++)
+				// {
 					
-					new VentanaTipoActividad(this);
-				}
+				// 	new VentanaTipoActividad(this);
+				// }
 				
 				
 				padre.crearProyecto(nombre, descripccion, fechaInicio, fechaFin, nActividades);

@@ -12,16 +12,28 @@ import uniandes.dpoo.proyecto2.controlador.Controlador;
 
 
 @SuppressWarnings("serial")
-public class VentanaPrincipal extends JFrame{
+public class VentanaPrincipal extends JFrame
+{
+
 	
 	private VentanaNuevoProyecto ventanaProyecto;
 
+	private static Controlador controlador = new Controlador();
 
-	public VentanaPrincipal(Boolean existe, Controlador controlador)
+	private PanelParticipantes panelParticipantes;
+
+	private PanelActividades panelActividades;
+
+	public Controlador getControlador()
+	{
+		return controlador;
+	}
+
+	public VentanaPrincipal(Boolean existe )
 	{
 		if (existe ==false)
 		{
-			ventanaProyecto = new VentanaNuevoProyecto(this, controlador);
+			ventanaProyecto = new VentanaNuevoProyecto(this);
 		}
 		else
 		{
@@ -29,22 +41,23 @@ public class VentanaPrincipal extends JFrame{
 		setTitle("Registro Proyecto :)");
 		setLayout(new BorderLayout());
 
-		JLabel arriba = new JLabel ("Nombre proyecto:" +"\n Fecha");
+		JLabel arriba = new JLabel (" Agregar y consultar participantes");
 
-		JButton izquierda = new JButton ("Agregar Participantes");
+		panelParticipantes = new PanelParticipantes(this);
+		panelActividades = new PanelActividades(this);
 		JButton centro = new JButton ("Agregar Actividad");
 		JButton derecha = new JButton ("Generar Reporte");
 
 		JLabel abajo = new JLabel ("Aqui va a ir la linea del tiempo");
 
-		add(izquierda, BorderLayout.WEST);
-		add(centro, BorderLayout.CENTER);
+		add(panelParticipantes, BorderLayout.WEST);
+		add(panelActividades, BorderLayout.CENTER);
 		add(derecha, BorderLayout.EAST);
 		add (arriba, BorderLayout.NORTH);
 		add (abajo, BorderLayout.SOUTH);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(1200,500);
+		setSize(1200,800);
 		setVisible(true);
 		}
 	}
@@ -65,11 +78,11 @@ public class VentanaPrincipal extends JFrame{
 		if (controlador.verificarProy()==false)
 		{
 			System.out.println((LocalDateTime.now()).toLocalDate());
-			new VentanaPrincipal(false, controlador);
+			new VentanaPrincipal(false);
 		}
 		else
 		{
-			new VentanaPrincipal(true, controlador);
+			new VentanaPrincipal(true);
 		}
 	}
 
