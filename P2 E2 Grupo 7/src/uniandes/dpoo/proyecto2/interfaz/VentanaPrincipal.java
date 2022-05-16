@@ -48,7 +48,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		btnReporte.setActionCommand(ENTER);
 		btnReporte.addActionListener(this);
 		
-		JLabel abajo = new JLabel ("Aqui va a ir la linea del tiempo");
+		JLabel abajo = new JLabel ("linea tiempo");
 
 		add(izquierda, BorderLayout.WEST);
 		add(centro, BorderLayout.CENTER);
