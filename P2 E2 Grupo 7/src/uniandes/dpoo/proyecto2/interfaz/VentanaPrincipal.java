@@ -24,6 +24,10 @@ public class VentanaPrincipal extends JFrame
 
 	private panelParticipantes panelParticipantes;
 
+	public Controlador getControlador()
+	{
+		return controlador;
+	}
 
 	public VentanaPrincipal(Boolean existe )
 	{
@@ -69,7 +73,7 @@ public class VentanaPrincipal extends JFrame
 		 * 			 llama a VentanaNuevoProyecto, crear proyecto (crear proyecto llama a controlador setProyect
 		 * 			llama a VentanaNuevoParticipante, crear participante (llama a controlador addParticipante*/
 		
-		
+			
 		if (controlador.verificarProy()==false)
 		{
 			System.out.println((LocalDateTime.now()).toLocalDate());

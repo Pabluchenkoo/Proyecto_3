@@ -42,9 +42,9 @@ public class Controlador {
 
 	}
 	
-	public void addParticipante() throws IOException
+	public void addParticipante(String pParticipante) throws IOException
 	{
-		aplicacion.addParticipante();
+		aplicacion.addParticipante(pParticipante);
 	}
 	
 	public void addActividad() throws IOException

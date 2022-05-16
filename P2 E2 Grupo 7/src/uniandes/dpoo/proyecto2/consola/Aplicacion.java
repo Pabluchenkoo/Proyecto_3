@@ -21,7 +21,7 @@ public class Aplicacion {
 
 	private Proyecto proyecto;
 
-	private Registro registro;
+	private Registro registro = new Registro();
 
 
 	public static Aplicacion consola = new Aplicacion();
@@ -92,7 +92,7 @@ public class Aplicacion {
 			if (registro.verificarParticipantes()==false)
 			{
 				System.out.println("-Creando participante nuevo... \n");
-				addParticipante();
+				addParticipante("");
 			}
 		}
 
@@ -143,7 +143,7 @@ public class Aplicacion {
 				else if (opcion_seleccionada == 3 && proyecto != null)
 					cargarReporte();
 				else if (opcion_seleccionada == 4 && proyecto != null)					
-					addParticipante();
+					addParticipante("");
 				else if (opcion_seleccionada == 5)
 				{
 					System.out.println("\n-Saliendo de la aplicacion ...");
@@ -319,12 +319,20 @@ public class Aplicacion {
 		System.out.println("\n-Proyecto cargado exitosamente! \n");
 	}
 
-	public void addParticipante() throws IOException
+	public void addParticipante(String pParticipante) throws IOException
 	{
-		String nombreParticipante = input("Ingrese nombre del Participante: ");
-		String correoParticipante = input("Ingrese correo del Participante: ");
-		registro.escribirParticipante(nombreParticipante, correoParticipante);
-		proyecto.cargarParticipante(nombreParticipante, correoParticipante);
+		String participante = pParticipante;
+		String[] info = participante.split(" ");
+		String pNombreParticipante = info[0];
+		String pCorreoParticipante = info[1];
+		proyecto = new Proyecto("x","x" , "x", "x", new ArrayList<String>());
+		registro.escribirParticipante(pNombreParticipante, pCorreoParticipante);
+		proyecto.cargarParticipante(pNombreParticipante, pCorreoParticipante);
+
+		// String nombreParticipante = input("Ingrese nombre del Participante: ");
+		// String correoParticipante = input("Ingrese correo del Participante: ");
+		// registro.escribirParticipante(nombreParticipante, correoParticipante);
+		// proyecto.cargarParticipante(nombreParticipante, correoParticipante);
 	}
 
 	public void addActividad() throws IOException 
