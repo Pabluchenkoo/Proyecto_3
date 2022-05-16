@@ -1,8 +1,11 @@
 package uniandes.dpoo.proyecto2.interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,11 +15,15 @@ import uniandes.dpoo.proyecto2.controlador.Controlador;
 
 
 @SuppressWarnings("serial")
-public class VentanaPrincipal extends JFrame
+public class VentanaPrincipal extends JFrame implements ActionListener
 {
 
 	
 	private VentanaNuevoProyecto ventanaProyecto;
+	private VentanaElegirParticipante ventanaReporte;
+	private static final String ENTER = "ENTER";
+	private JButton btnReporte;
+
 
 	private static Controlador controlador = new Controlador();
 
@@ -38,6 +45,8 @@ public class VentanaPrincipal extends JFrame
 		else
 		{
 		
+		// controlador.cargarProyectoInterfaz();
+			
 		setTitle("Registro Proyecto :)");
 		setLayout(new BorderLayout());
 
@@ -46,13 +55,16 @@ public class VentanaPrincipal extends JFrame
 		panelParticipantes = new PanelParticipantes(this);
 		panelActividades = new PanelActividades(this);
 		JButton centro = new JButton ("Agregar Actividad");
-		JButton derecha = new JButton ("Generar Reporte");
 
-		JLabel abajo = new JLabel ("Aqui va a ir la linea del tiempo");
+		btnReporte = new JButton("Generar reporte");
+		btnReporte.setActionCommand(ENTER);
+		btnReporte.addActionListener(this);
+		
+		JLabel abajo = new JLabel ("linea tiempo");
 
 		add(panelParticipantes, BorderLayout.WEST);
 		add(panelActividades, BorderLayout.CENTER);
-		add(derecha, BorderLayout.EAST);
+		add(btnReporte, BorderLayout.EAST);
 		add (arriba, BorderLayout.NORTH);
 		add (abajo, BorderLayout.SOUTH);
 
@@ -73,7 +85,7 @@ public class VentanaPrincipal extends JFrame
 		/*if True:
 		 * 			 llama a VentanaNuevoProyecto, crear proyecto (crear proyecto llama a controlador setProyect
 		 * 			llama a VentanaNuevoParticipante, crear participante (llama a controlador addParticipante*/
-		Controlador controlador = new Controlador();
+		controlador = new Controlador();
 
 		if (controlador.verificarProy()==false)
 		{
@@ -88,12 +100,31 @@ public class VentanaPrincipal extends JFrame
 
 
 	public void crearProyecto(String nombre, String descripccion, String fechaInicio, String fechaFin,
-			int nActividades)
+			int Actividades, Controlador controlador) throws IOException
 	{
 		// TODO Auto-generated method stub
+		controlador.setProyecto(nombre, descripccion, fechaInicio, fechaFin, Actividades);
+	}
+	
+	public void generarReporte(int id, Controlador controlador)
+	{
+		
+		ArrayList<String> reporte = controlador.cargarReporte(id);
 		
 	}
 	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String grito = e.getActionCommand();
+		if (grito.equals(ENTER))
+		{
+			System.out.println("Ejecutando generar reporte");
+			
+			ventanaReporte = new VentanaElegirParticipante(this, controlador);
+			
+		}
+		
+	}
 
 
 }

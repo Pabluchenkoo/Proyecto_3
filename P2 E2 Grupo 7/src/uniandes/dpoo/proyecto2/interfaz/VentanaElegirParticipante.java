@@ -10,26 +10,30 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import uniandes.dpoo.proyecto2.controlador.Controlador;
+
 
 @SuppressWarnings("serial")
-public class VentanaTipoActividad extends JFrame implements ActionListener {
+public class VentanaElegirParticipante extends JFrame implements ActionListener {
 	
 	private static final String ENTER = "ENTER";
 	private JButton btnEnter;
 	
 	private JLabel labelN1;
 	private JTextField textN1;
-	private VentanaNuevoProyecto papa;
+	private VentanaPrincipal papa;
+	private Controlador elControlador;
 	
-	public VentanaTipoActividad(VentanaNuevoProyecto padre)
+	public VentanaElegirParticipante(VentanaPrincipal padre, Controlador controlador)
 	{
 		papa = padre;
+		elControlador = controlador;
 
-		setTitle("Agregar nuevo tipo de actividad");
+		setTitle("Generar reporte de participante");
 
 		setLayout(new BorderLayout());
 		
-		labelN1 = new JLabel("Nombre:");
+		labelN1 = new JLabel("id de Participante:");
 		textN1 = new JTextField();
 		JPanel auxN1 = new JPanel();
 		auxN1.setLayout(new BorderLayout());
@@ -55,10 +59,10 @@ public class VentanaTipoActividad extends JFrame implements ActionListener {
 		if (grito.equals(ENTER))
 		{
 			String n1Str = textN1.getText();
-			papa.agregarTipoActividad(n1Str);
+			int id = Integer.parseInt(n1Str);
+			papa.generarReporte(id, elControlador);
 			dispose();
 		}
 		
 	}
-
 }

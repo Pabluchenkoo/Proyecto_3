@@ -20,8 +20,12 @@ public class VentanaNuevoProyecto extends JFrame implements ActionListener{
 
 	private static final String ENTER = "ENTER";
 
+	private static final String AGREGAR = "AGREGAR";
+
 	private ArrayList <String> tipoActividades;
 	
+	private Controlador aControlador;
+
 	private JLabel labelN1;
 	private JTextField textN1;
 
@@ -33,20 +37,24 @@ public class VentanaNuevoProyecto extends JFrame implements ActionListener{
 
 	private JLabel labelS2;
 	private JTextField textS2;
-	
+
 	private JLabel labelS3;
 	private JTextField textS3;
 
 	private JButton btnEnter;
-	
+
+	private JButton btnAgregar;
+
 	private VentanaPrincipal padre;
 	private Controlador controlador;
 
 	public VentanaNuevoProyecto(VentanaPrincipal papa)
 	{
 		padre = papa;
-		
+
 		tipoActividades = new ArrayList<>();
+		
+		
 
 		setTitle("Nuevo Proyecto");
 
@@ -85,34 +93,47 @@ public class VentanaNuevoProyecto extends JFrame implements ActionListener{
 		auxS2.add(labelS2, BorderLayout.WEST);
 		auxS2.add(textS2, BorderLayout.CENTER);
 
-		JPanel auxST = new JPanel();
-		auxST.setLayout(new BorderLayout());
-		auxST.add(auxS1, BorderLayout.NORTH);
-		auxST.add(auxS2, BorderLayout.SOUTH);
-
-
-		add(auxNT, BorderLayout.NORTH);
-		add(auxST, BorderLayout.CENTER);
-		
-		
+		JPanel auxSDate = new JPanel();
+		auxSDate.setLayout(new BorderLayout());
+		auxSDate.add(auxS1, BorderLayout.NORTH);
+		auxSDate.add(auxS2, BorderLayout.SOUTH);
 
 		btnEnter = new JButton("Enter");
 		btnEnter.setActionCommand(ENTER);
 		btnEnter.addActionListener(this);
-		
+
+		JPanel auxSButton = new JPanel();
+		auxSButton.setLayout(new BorderLayout());
+		auxSButton.add(btnEnter, BorderLayout.NORTH);
+
+		JPanel auxST = new JPanel();
+		auxST.setLayout(new BorderLayout());
+		auxST.add(auxSDate, BorderLayout.NORTH);
+		auxST.add(auxSButton, BorderLayout.SOUTH);
+
+
+		add(auxNT, BorderLayout.CENTER);
+		add(auxST, BorderLayout.SOUTH);
+
+		btnAgregar = new JButton("Agregar");
+		btnAgregar.setActionCommand(AGREGAR);
+		btnAgregar.addActionListener(this);
+
+
 		labelS3 = new JLabel("Numero de actividades tipo:");
 		textS3 = new JTextField();
 		JPanel auxS3 = new JPanel();
 		auxS3.setLayout(new BorderLayout());
 		auxS3.add(labelS3, BorderLayout.WEST);
 		auxS3.add(textS3, BorderLayout.CENTER);
-		
+
 		JPanel auxST2 = new JPanel();
 		auxST2.setLayout(new BorderLayout());
 		auxST2.add(auxS3, BorderLayout.NORTH);
-		auxST2.add(btnEnter, BorderLayout.SOUTH);
-		
-		add(auxST2, BorderLayout.SOUTH);
+		auxST2.add(btnAgregar, BorderLayout.SOUTH);
+
+		add(auxST2, BorderLayout.NORTH);
+
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -123,14 +144,12 @@ public class VentanaNuevoProyecto extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String grito = e.getActionCommand();
-		if (grito.equals(ENTER))
+
+		if (grito.equals(AGREGAR))
 		{
 			try
 			{
-				String nombre = textN1.getText();
-				String descripccion = textN2.getText();
-				String fechaInicio = textS1.getText();
-				String fechaFin = textS2.getText();
+
 				String numactividadesTipo = textS3.getText();
 				int nActividades = Integer.parseInt(numactividadesTipo);
 				// for (int pos = 0; pos < nActividades; pos++)
@@ -139,17 +158,15 @@ public class VentanaNuevoProyecto extends JFrame implements ActionListener{
 				// 	new VentanaTipoActividad(this);
 				// }
 				
-				
-				padre.crearProyecto(nombre, descripccion, fechaInicio, fechaFin, nActividades);
 			}
 			catch (Exception ex) {
 				JOptionPane.showMessageDialog(this, "Falta dato", "Error", JOptionPane.WARNING_MESSAGE);
 			}
 		}
-		
+
 
 	}
-	
+
 	public void agregarTipoActividad(String actividad)
 	{
 		tipoActividades.add(actividad);

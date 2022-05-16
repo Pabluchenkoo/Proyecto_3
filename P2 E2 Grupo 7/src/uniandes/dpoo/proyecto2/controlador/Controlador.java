@@ -65,5 +65,15 @@ public class Controlador {
 	public LinkedList<String> cargarParticipantes() {
 		return aplicacion.cargarParticipantes();
 	}
+	public ArrayList<String> cargarReporte(int id)
+	{
+		
+		return aplicacion.cargarReporte(id);
+	}
+
+	public void cargarProyectoInterfaz()throws IOException {
+
+		aplicacion.cargarProyecto(null);
+	}
 
 }

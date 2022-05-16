@@ -79,10 +79,10 @@ public class Proyecto {
 	
 	
 	
-	public void ejecutarReporte(int id)
+	public ArrayList<String> ejecutarReporte(int id)
 	{
 		
-		elReporte.ejecutarReporte(id, actividades, tipoActividades, participantes);
+		return elReporte.ejecutarReporte(id, actividades, tipoActividades, participantes);
 	}
 
 

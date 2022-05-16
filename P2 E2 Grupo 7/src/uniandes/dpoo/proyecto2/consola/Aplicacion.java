@@ -484,6 +484,18 @@ public class Aplicacion {
 
 	}
 
+	public ArrayList<String> cargarReporte(int id)
+	{
+		ArrayList<Participante> listaParticipantes = proyecto.getParticipantes();
+		int posParticipante = 0;
+		for (Participante elParticipante:listaParticipantes)
+		{
+			System.out.println(posParticipante+"- " + elParticipante.getNombre());
+			posParticipante++;
+		}
+		
+		return proyecto.ejecutarReporte(id);
+	}
 
 
 }

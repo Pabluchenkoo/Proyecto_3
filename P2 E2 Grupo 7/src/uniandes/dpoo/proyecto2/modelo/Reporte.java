@@ -12,7 +12,7 @@ public class Reporte {
 	}
 
 
-	public void ejecutarReporte(int id, ArrayList<Actividad> actividades, ArrayList <String> tipoActividades, ArrayList<Participante> participantes)
+	public ArrayList<String> ejecutarReporte(int id, ArrayList<Actividad> actividades, ArrayList <String> tipoActividades, ArrayList<Participante> participantes)
 	{	
 		Map<Integer,Integer> mapaTipoAct = new HashMap<>();
 		ArrayList<String> fechas = new ArrayList<>();
@@ -44,10 +44,15 @@ public class Reporte {
 				+"\n Tiempo promedio por dia: " + tiempoPorDia;
 		System.out.println(printReporte);
 		System.out.println("\n Tiempo por actividad:");
+		ArrayList<String> printFinal = new ArrayList<>();
+		printFinal.add(printReporte);
 		for (Integer idTipo: mapaTipoAct.keySet())
 		{
+			String infoAct = "Tipo De actividad: "+tipoActividades.get(idTipo) + ", Tiempo:" + mapaTipoAct.get(idTipo);
 			System.out.println("Tipo De actividad: "+tipoActividades.get(idTipo) + ", Tiempo:" + mapaTipoAct.get(idTipo));
+			printFinal.add(infoAct);
 		}
+		return (printFinal);
 	}
 
 }
