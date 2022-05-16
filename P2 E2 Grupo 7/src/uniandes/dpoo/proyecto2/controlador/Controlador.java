@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import uniandes.dpoo.proyecto2.consola.Aplicacion;
 import uniandes.dpoo.proyecto2.modelo.Proyecto;
@@ -56,6 +57,10 @@ public class Controlador {
 	,String pHoraFin)throws IOException 
 	{
 		aplicacion.addActividadInterfaz(pTitulo,pDescripcion,pTipoActividad,pFecha,pHoraInicio,pHoraFin);
+	}
+
+	public LinkedList<String> cargarParticipantes() {
+		return aplicacion.cargarParticipantes();
 	}
 
 }

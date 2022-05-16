@@ -61,44 +61,15 @@ public class panelParticipantes extends JPanel implements ActionListener {
 
 
     public panelParticipantes(VentanaPrincipal principal) {
+
+
         ventanaPrincipal = principal;
         setPreferredSize(new Dimension(250, 200));
         ventanaPrincipal = principal;
         setLayout(new BorderLayout());
         setBackground(Color.LIGHT_GRAY);
 
-        // // ---------------------------------------------------------------------------
-        // // Panel Lista de proyectos -------------------------------------------------
-        // // ---------------------------------------------------------------------------
-
-        // JPanel panelProyectos = new JPanel();
-        // panelProyectos.setLayout(new BorderLayout());
-        // panelProyectos.setPreferredSize(new Dimension(250, 200));
-        // panelProyectos.setBackground(Color.LIGHT_GRAY);
-        // this.add(panelProyectos, BorderLayout.NORTH);
-
-        // JLabel lblProyectos = new JLabel("Lista de Proyectos:");
-        // lblProyectos.setFont(new Font("Arial", Font.BOLD, 18));
-        // panelProyectos.add(lblProyectos, BorderLayout.NORTH);
-
-        // listaProyectos = new JList();
-        // DefaultListModel listaProyectosModel = new DefaultListModel();
-        // listaProyectos.setModel(listaProyectosModel);
-        // listaProyectosModel.addElement("Proyecto1");
-        
-
-        // scrollProyectos = new JScrollPane(listaProyectos);
-        // scrollProyectos.setPreferredSize(new Dimension(250, 240));
-        // panelProyectos.add(scrollProyectos, BorderLayout.CENTER);
-
-        // btnEscoger = new JButton("Escoger");
-        // // btnEscoger.addActionListener( ventanaPrincipal );
-        // btnEscoger.setPreferredSize(new Dimension(20, 40));
-        // panelProyectos.add(btnEscoger, BorderLayout.SOUTH);
-
-        // ---------------------------------------------------------------------------
-        // Panel Participantes-----------------------------------------------------
-        // ---------------------------------------------------------------------------
+        cargarParticipantes();
 
         JPanel panelParticipantes = new JPanel();
         panelParticipantes.setLayout(new BorderLayout());
@@ -162,7 +133,21 @@ public class panelParticipantes extends JPanel implements ActionListener {
 
     }
 
-    
+    public void cargarParticipantes()
+    {
+        LinkedList<String> persistentes = ventanaPrincipal.getControlador().cargarParticipantes();
+
+        for(int i =0; i< persistentes.size();i++)
+        {
+            String participante = persistentes.get(i);
+            String[] partes = participante.split(" ");
+            String nombre = partes[0];
+            String correo = partes[1];
+            listaParticipantesModel.addElement(nombre + "-" + correo);
+
+        }
+
+    }    
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
 

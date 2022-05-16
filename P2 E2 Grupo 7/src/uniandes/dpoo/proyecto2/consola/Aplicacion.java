@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.time.LocalDateTime;
 
 import uniandes.dpoo.proyecto2.modelo.Actividad;
@@ -26,7 +27,7 @@ public class Aplicacion {
 
 	public static Aplicacion consola = new Aplicacion();
 
-
+	private LinkedList<String>	participantesIngresados = new LinkedList<String>();
 
 	public static void main(String[] args) throws FileNotFoundException, IOException  
 	{
@@ -325,6 +326,7 @@ public class Aplicacion {
 		String[] info = participante.split(" ");
 		String pNombreParticipante = info[0];
 		String pCorreoParticipante = info[1];
+		participantesIngresados.addLast	(participante);
 		proyecto = new Proyecto("x","x" , "x", "x", new ArrayList<String>());
 		registro.escribirParticipante(pNombreParticipante, pCorreoParticipante);
 		proyecto.cargarParticipante(pNombreParticipante, pCorreoParticipante);
@@ -470,6 +472,14 @@ public class Aplicacion {
 
 		Registro registro = new Registro();
 		return registro;
+	}
+
+
+
+	public LinkedList<String> cargarParticipantes() 
+	{
+		return participantesIngresados;
+
 	}
 
 
