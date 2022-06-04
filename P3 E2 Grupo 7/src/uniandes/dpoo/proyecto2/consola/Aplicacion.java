@@ -9,14 +9,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.time.LocalDateTime;
 
 import uniandes.dpoo.proyecto2.modelo.Actividad;
+import uniandes.dpoo.proyecto2.modelo.PaqueteTrabajo;
 import uniandes.dpoo.proyecto2.modelo.Participante;
 import uniandes.dpoo.proyecto2.modelo.Proyecto;
 import uniandes.dpoo.proyecto2.modelo.Registro;
 import uniandes.dpoo.proyecto2.modelo.Stopwatch;
+import uniandes.dpoo.proyecto2.modelo.Tarea;
+import uniandes.dpoo.proyecto2.modelo.WBS;
 
 public class Aplicacion {
 
@@ -259,7 +263,10 @@ public class Aplicacion {
 		}
 		this.proyecto = new Proyecto(nombreProyecto, descripccionProyecto, fechaInicioProyecto, fechaFinalizacionProyecto, actividadesTipo);
 		registro.escribirProyecto(nombreProyecto, descripccionProyecto, fechaInicioProyecto, fechaFinalizacionProyecto, actividadesTipo);
-
+		//una vez creado el proyecto, se debe crear un WBS correspondiente a este proyecto
+		String nombrePaquete = input("Ingrese nombre de Proyecto: ");
+		String descripcionPaquete = input("Ingrese descripccion del Proyecto: ");
+		proyecto.crearWBS(nombrePaquete,descripcionPaquete);
 	}
 	public void setProyectoInterfaz(String pNombreProyecto, String pDescripcionProyecto, String pFechaInicioProyecto,
 	 String pFechaFinalizacionProyecto, int pNumeroActividades) throws IOException
@@ -380,6 +387,39 @@ public class Aplicacion {
 
 		registro.escribirActividades(titulo, descripccion, tipoID, fecha, horaInicio, horaFin, duracion, participanteID);
 		proyecto.cargarActividad(titulo, descripccion, tipoID, fecha, horaInicio, horaFin, duracion, participanteID);
+
+		//una vez se haya cargado la actividad, se debe indicar la tarea dentro del WBs correspondiente
+		WBS wbsCorrespondiente = proyecto.getElWBS();
+		//toca pedir los datos por teclado para cargar el paquete de trabajo
+		String pNombre = input("Ingrese nombre del paquete de trabajo: ");
+		String pDescripcion = input("Ingrese descripcion del paquete de trabajo: ");
+
+		String nombreTarea = input("Ingrese nombre de la tarea: ");
+		String nombreDescripcion = input("Ingrese descripcion de la tarea: ");
+		String tipo = input("Ingrese tipo de la tarea: ");
+
+		HashMap<Tarea,ArrayList<String>> actividades = new HashMap<>();
+
+		ArrayList<String> listaActividadesTarea = new ArrayList<>();
+		listaActividadesTarea.add(titulo);
+		actividades.put(new Tarea(nombreTarea, nombreDescripcion,tipo), listaActividadesTarea );	
+
+		ArrayList<Actividad> actividadesDelProyecto = proyecto.getActividades();
+
+		for(int i=0;i<actividadesDelProyecto.size();i++)
+		{
+			if(!actividadesDelProyecto.get(i).getTitulo().equals(titulo))
+			{
+				LinkedList<Tarea> nuevoPaqueteConTareas = new LinkedList<>();
+				PaqueteTrabajo nuevoPaquete = new PaqueteTrabajo(pNombre, pDescripcion, nuevoPaqueteConTareas);
+				wbsCorrespondiente.setPaqueteTrabajo(nuevoPaquete);
+			}
+			
+		}
+		
+		
+		
+
 	}
 
 	public void addActividadInterfaz(String pTitulo,String pDescripcion, int pTipoActividad, String pFecha, String pHoraInicio
